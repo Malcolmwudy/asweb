@@ -39,8 +39,9 @@ export default function Home() {
   const [currentLiveStreamUrl, setCurrentLiveStreamUrl] = useState('')
   const [currentLiveStreamName, setCurrentLiveStreamName] = useState('')
   const [showMoreInfo, setShowMoreInfo] = useState(false)
-  const [currentChannel, setCurrentChannel] = useState(getCurrentChannel())
-  const [joinUrl, setJoinUrl] = useState(getJoinUrl())
+  // 使用默认值初始化，避免服务器端和客户端不一致
+  const [currentChannel, setCurrentChannel] = useState<'channelA' | 'channelB' | 'channelC'>('channelA')
+  const [joinUrl, setJoinUrl] = useState('')
 
   // 检查是否需要注册
   useEffect(() => {
@@ -59,7 +60,7 @@ export default function Home() {
 
     checkRegistration()
     
-    // 监听渠道变化
+    // 监听渠道变化（只在客户端执行）
     const updateChannel = () => {
       const channel = getCurrentChannel()
       setCurrentChannel(channel)

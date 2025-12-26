@@ -16,8 +16,12 @@ export default function Header() {
   const pathname = usePathname()
   const [joinUrl, setJoinUrl] = useState('')
   const [isRegistered, setIsRegistered] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   
   useEffect(() => {
+    // 标记组件已挂载（客户端），避免 Hydration 错误
+    setIsMounted(true)
+    
     // 在 axi-assistant 页面不需要更新 joinUrl
     if (pathname === '/axi-assistant') {
       return
@@ -56,15 +60,15 @@ export default function Header() {
     return null
   }
 
+  // 在服务器端或未挂载时，不渲染任何内容（避免 Hydration 错误）
+  if (!isMounted) {
+    return null
+  }
+
   // 在首页时，需要检查用户是否已注册
   // 如果未注册，不显示 header（显示注册表单）
   // 如果已注册，显示 header（显示内容页面）
   if (pathname === '/') {
-    // 检查注册状态
-    const registeredEmail = getRegisteredEmail()
-    const needsReVerify = needsReVerification()
-    const isRegistered = !!registeredEmail && !needsReVerify
-    
     // 如果未注册，不显示 header
     if (!isRegistered) {
       return null

@@ -373,6 +373,88 @@ export async function getRiskWarning(): Promise<{
   }
 }
 
+/**
+ * 获取支持团队列表
+ * 对应 Android 的 SupabaseService.getSupportTeams
+ */
+export async function getSupportTeams(): Promise<{
+  success: boolean
+  data?: SupportTeam[]
+  error?: string
+}> {
+  try {
+    const config = getSupabaseConfig()
+    const url = `${config.url}/rest/v1/support_teams?select=*&is_active=eq.true&order=id.asc`
+
+    const response = await fetch(url, {
+      headers: {
+        apikey: config.key,
+        Authorization: `Bearer ${config.key}`,
+      },
+    })
+
+    if (response.status === 200) {
+      const data = await response.json()
+      return {
+        success: true,
+        data: Array.isArray(data) ? data : [],
+      }
+    } else {
+      return {
+        success: false,
+        error: `获取支持团队列表失败，状态码: ${response.status}`,
+      }
+    }
+  } catch (error: any) {
+    console.error('Get support teams error:', error)
+    return {
+      success: false,
+      error: sanitizeErrorMessage(error.message || '获取支持团队列表失败'),
+    }
+  }
+}
+
+/**
+ * 获取更多提示列表（包含风险提示和其他提示内容）
+ * 对应 Android 的 SupabaseService.getMoreTips
+ */
+export async function getMoreTips(): Promise<{
+  success: boolean
+  data?: MoreTip[]
+  error?: string
+}> {
+  try {
+    const config = getSupabaseConfig()
+    const url = `${config.url}/rest/v1/more_tips?select=*&is_active=eq.true&order=display_order.asc`
+
+    const response = await fetch(url, {
+      headers: {
+        apikey: config.key,
+        Authorization: `Bearer ${config.key}`,
+      },
+    })
+
+    if (response.status === 200) {
+      const data = await response.json()
+      return {
+        success: true,
+        data: Array.isArray(data) ? data : [],
+      }
+    } else {
+      return {
+        success: false,
+        error: `获取更多提示列表失败，状态码: ${response.status}`,
+      }
+    }
+  } catch (error: any) {
+    console.error('Get more tips error:', error)
+    return {
+      success: false,
+      error: sanitizeErrorMessage(error.message || '获取更多提示列表失败'),
+    }
+  }
+}
+
 // 类型定义（对应 Android 的 model 类）
 export interface CaseStudy {
   id: number
@@ -462,5 +544,26 @@ export interface RiskWarning {
   content: string
   is_active: boolean
   created_at: string
+}
+
+export interface SupportTeam {
+  id: number
+  team_name_en: string
+  team_name_cn: string
+  email: string
+  is_active: boolean
+  created_at: string | null
+  updated_at: string | null
+}
+
+export interface MoreTip {
+  id: number
+  tip_type: string
+  title: string
+  content: string
+  display_order: number
+  is_active: boolean
+  created_at: string | null
+  updated_at: string | null
 }
 

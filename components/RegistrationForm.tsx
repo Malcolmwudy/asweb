@@ -32,7 +32,10 @@ export default function RegistrationForm({
     if (!needsReVerification() && getRegisteredEmail()) {
       const registeredEmail = getRegisteredEmail()
       if (registeredEmail) {
-        startSession(registeredEmail) // 开始会话统计
+        // 开始会话统计（静默处理，不影响主流程）
+        startSession(registeredEmail).catch((err) => {
+          console.warn('开始会话统计失败（不影响主流程）:', err)
+        })
       }
       onSuccess()
     }
@@ -113,12 +116,16 @@ export default function RegistrationForm({
       // 验证成功，保存注册信息
       saveRegistration(email)
 
-      // 记录用户注册统计
+      // 记录用户注册统计（静默处理，不影响主流程）
       const channelCode = getCurrentChannel()
-      recordRegistration(email, channelCode)
+      recordRegistration(email, channelCode).catch((err) => {
+        console.warn('记录注册统计失败（不影响主流程）:', err)
+      })
 
-      // 开始会话统计
-      startSession(email)
+      // 开始会话统计（静默处理，不影响主流程）
+      startSession(email).catch((err) => {
+        console.warn('开始会话统计失败（不影响主流程）:', err)
+      })
 
       onSuccess()
     } else {

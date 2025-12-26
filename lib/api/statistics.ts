@@ -40,13 +40,17 @@ export async function recordRegistration(
     if (response.ok) {
       return { success: true }
     } else {
+      // 获取错误详情用于调试
+      const errorText = await response.text().catch(() => '无法读取错误信息')
+      console.warn('Record registration failed:', response.status, errorText)
       return {
         success: false,
         error: '记录注册统计失败',
       }
     }
   } catch (error: any) {
-    console.error('Record registration error:', error)
+    // 静默处理错误，不影响主流程
+    console.warn('Record registration error (不影响主流程):', error)
     return {
       success: false,
       error: error.message || '记录注册统计失败',
@@ -77,13 +81,17 @@ export async function startSession(email: string): Promise<{ success: boolean; e
     if (response.ok) {
       return { success: true }
     } else {
+      // 获取错误详情用于调试
+      const errorText = await response.text().catch(() => '无法读取错误信息')
+      console.warn('Start session failed:', response.status, errorText)
       return {
         success: false,
         error: '开始会话统计失败',
       }
     }
   } catch (error: any) {
-    console.error('Start session error:', error)
+    // 静默处理错误，不影响主流程
+    console.warn('Start session error (不影响主流程):', error)
     return {
       success: false,
       error: error.message || '开始会话统计失败',
@@ -114,13 +122,17 @@ export async function endSession(email: string): Promise<{ success: boolean; err
     if (response.ok) {
       return { success: true }
     } else {
+      // 获取错误详情用于调试
+      const errorText = await response.text().catch(() => '无法读取错误信息')
+      console.warn('End session failed:', response.status, errorText)
       return {
         success: false,
         error: '结束会话统计失败',
       }
     }
   } catch (error: any) {
-    console.error('End session error:', error)
+    // 静默处理错误，不影响主流程
+    console.warn('End session error (不影响主流程):', error)
     return {
       success: false,
       error: error.message || '结束会话统计失败',

@@ -1,0 +1,15 @@
+# Cloudflare Pages 重定向规则
+# 用于多渠道网址分发
+
+# 渠道 A (asa) - 重定向到首页并添加 ?axiselectweba 参数
+/asa/*  /?axiselectweba  301
+/asa    /?axiselectweba  301
+
+# 渠道 B (asb) - 重定向到首页并添加 ?axiselectwebb 参数
+/asb/*  /?axiselectwebb  301
+/asb    /?axiselectwebb  301
+
+# 渠道 C (asc) - 重定向到首页并添加 ?axiselectwebc 参数
+/asc/*  /?axiselectwebc  301
+/asc    /?axiselectwebc  301
+

@@ -1,0 +1,16 @@
+# Cloudflare Pages 忽略文件
+# 这些文件不会被部署到 Cloudflare Pages
+
+# Next.js 缓存
+.next/cache/
+.vercel/output/static/.next/cache/
+
+# 开发文件
+node_modules/
+.git/
+.env.local
+*.log
+
+# 构建临时文件
+.next/cache/webpack/
+

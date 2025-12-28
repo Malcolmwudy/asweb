@@ -1,0 +1,59 @@
+========================================
+推送渠道过滤功能更新到 GitHub
+========================================
+
+修改内容：
+- getSupportTeams() 和 getMoreTips() API 函数支持渠道参数
+- 添加 is_channel_specific 和 channel_code 字段
+- 联系支持页面支持渠道过滤
+
+========================================
+快速推送命令（在 axiselect-web 目录执行）
+========================================
+
+方法一：使用脚本（推荐）
+------------------------
+.\推送渠道过滤功能.ps1
+
+方法二：手动执行命令
+------------------------
+
+1. 进入目录：
+cd /d "E:\Cursor\AxiSelect部署网页版本\axiselect-web"
+
+2. 添加文件：
+git add lib/api/content.ts app/contact/page.tsx
+
+3. 提交更改：
+git commit -m "添加 support_teams 和 more_tips 的渠道过滤功能"
+
+4. 推送到 GitHub：
+git push origin main
+
+========================================
+完整命令（一次性复制，在 CMD 中执行）
+========================================
+
+cd /d "E:\Cursor\AxiSelect部署网页版本\axiselect-web"
+git add lib/api/content.ts app/contact/page.tsx
+git commit -m "添加 support_teams 和 more_tips 的渠道过滤功能"
+git push origin main
+
+========================================
+提交信息详情
+========================================
+
+添加 support_teams 和 more_tips 的渠道过滤功能
+
+功能更新：
+- getSupportTeams() 和 getMoreTips() API 函数支持渠道参数
+- 添加 is_channel_specific 和 channel_code 字段到类型定义
+- 联系支持页面支持渠道过滤，自动显示对应渠道的内容
+- 监听渠道变化，自动刷新数据
+
+过滤逻辑：
+- 显示 is_channel_specific = false 的项（所有渠道统一显示）
+- 显示 is_channel_specific = true 且 channel_code 匹配当前渠道的项（渠道专属）
+
+========================================
+

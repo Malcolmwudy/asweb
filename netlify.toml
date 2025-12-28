@@ -1,0 +1,50 @@
+# Netlify 配置文件
+# 用于多渠道网址分发
+
+# 构建配置
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+# 重定向规则 - 渠道 A (asa)
+# 将 /asa 和 /asa/* 重定向到首页并添加 ?axiselectweba 参数
+[[redirects]]
+  from = "/asa/*"
+  to = "/?axiselectweba"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/asa"
+  to = "/?axiselectweba"
+  status = 301
+  force = true
+
+# 重定向规则 - 渠道 B (asb)
+# 将 /asb 和 /asb/* 重定向到首页并添加 ?axiselectwebb 参数
+[[redirects]]
+  from = "/asb/*"
+  to = "/?axiselectwebb"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/asb"
+  to = "/?axiselectwebb"
+  status = 301
+  force = true
+
+# 重定向规则 - 渠道 C (asc)
+# 将 /asc 和 /asc/* 重定向到首页并添加 ?axiselectwebc 参数
+[[redirects]]
+  from = "/asc/*"
+  to = "/?axiselectwebc"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/asc"
+  to = "/?axiselectwebc"
+  status = 301
+  force = true
+

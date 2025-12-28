@@ -1,0 +1,65 @@
+========================================
+删除无用文件并推送到 GitHub
+========================================
+
+要删除的文件：
+- fix_search_path_security.sql
+- 修复search_path_已执行方案.sql
+- 快速推送.bat
+- 手动推送命令.txt
+- 推送渠道过滤功能命令.txt
+- 推送版本号更新命令.txt
+- 清理GitHub历史_手动命令.txt
+- 清理缓存.js
+
+========================================
+PowerShell 执行命令（按顺序执行）
+========================================
+
+方法一：使用脚本（推荐）
+------------------------
+cd "E:\Cursor\AxiSelect部署网页版本\axiselect-web"
+.\删除无用文件并推送.ps1
+
+方法二：手动执行命令
+------------------------
+
+第 1 步：进入目录
+cd "E:\Cursor\AxiSelect部署网页版本\axiselect-web"
+
+第 2 步：删除文件
+git rm fix_search_path_security.sql
+git rm "修复search_path_已执行方案.sql"
+git rm 快速推送.bat
+git rm 手动推送命令.txt
+git rm 推送渠道过滤功能命令.txt
+git rm 推送版本号更新命令.txt
+git rm 清理GitHub历史_手动命令.txt
+git rm 清理缓存.js
+
+第 3 步：提交更改
+git commit -m "删除无用文件"
+
+第 4 步：推送到 GitHub
+git push origin main
+
+========================================
+完整命令（PowerShell，一次性复制）
+========================================
+
+cd "E:\Cursor\AxiSelect部署网页版本\axiselect-web"
+git rm fix_search_path_security.sql "修复search_path_已执行方案.sql" 快速推送.bat 手动推送命令.txt 推送渠道过滤功能命令.txt 推送版本号更新命令.txt 清理GitHub历史_手动命令.txt 清理缓存.js
+git commit -m "删除无用文件"
+git push origin main
+
+========================================
+完整命令（CMD，一次性复制）
+========================================
+
+cd /d "E:\Cursor\AxiSelect部署网页版本\axiselect-web"
+git rm fix_search_path_security.sql "修复search_path_已执行方案.sql" 快速推送.bat 手动推送命令.txt 推送渠道过滤功能命令.txt 推送版本号更新命令.txt 清理GitHub历史_手动命令.txt 清理缓存.js
+git commit -m "删除无用文件"
+git push origin main
+
+========================================
+
